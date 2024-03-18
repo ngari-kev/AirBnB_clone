@@ -11,6 +11,8 @@ class BaseModel():
     This is a class that other classes inherit from.
 
     """
+    unique_ids = set()
+
     def __init__(self, *args, **kwargs):
         """
         initializes a new instance.
@@ -27,6 +29,9 @@ class BaseModel():
                 self.updated_at = datetime.strptime(kwargs['updated_at'], tfom)
         else:
             self.id = str(uuid.uuid4())
+            while self.id in BaseModel.unique_ids:
+                self.id = str(uuid.uuid4())
+            BaseModel.unique_ids.add(self.id)
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
 
