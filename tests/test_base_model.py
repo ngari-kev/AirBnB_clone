@@ -5,7 +5,7 @@ from datetime import datetime
 import re
 import uuid
 """
-This is a unittest for base_model.py
+This is a unittest for BaseModel.
 """
 
 
@@ -155,6 +155,6 @@ class TestBaseModel(unittest.TestCase):
         b1 = self.test
         with self.assertRaises(TypeError):
             b1.to_dict(None)
-
+ 
 if __name__ == '__main__':
     unittest.main()

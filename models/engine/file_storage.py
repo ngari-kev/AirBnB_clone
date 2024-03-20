@@ -51,4 +51,4 @@ class FileStorage():
                 serialized = json.load(f)
                 for key, object_dict in serialized.items():
                     FileStorage.__objects[key] = eval(
-                        object_dict['__class__'])(**object_dict)
+                        object_dict['__class__'])(**object_dict) 
