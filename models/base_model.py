@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from datetime import datetime
+import models
 import uuid
 """
     This is a module that contains the base model.
@@ -34,6 +35,7 @@ class BaseModel():
             BaseModel.unique_ids.add(self.id)
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -47,6 +49,7 @@ class BaseModel():
         Updates the attribute updated_at.
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
