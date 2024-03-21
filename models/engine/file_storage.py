@@ -8,6 +8,12 @@ from os import path
 import json
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+
 
 class FileStorage():
     """
@@ -52,4 +58,4 @@ class FileStorage():
                 serialized = json.load(f)
                 for key, object_dict in serialized.items():
                     FileStorage.__objects[key] = eval(
-                        object_dict['__class__'])(**object_dict) 
+                        object_dict['__class__'])(**object_dict)
