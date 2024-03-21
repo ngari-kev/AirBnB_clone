@@ -16,11 +16,11 @@ class TestFileStorage(unittest.TestCase):
         self.file_path = "file.json"
         self.storage = FileStorage()
 
-    def tearDown(self):
-        """ check remove class """
+    def tearDownClass(cls):
+        """Clean up the dirt"""
         try:
-            remove('file.json')
-        except Exception:
+            os.remove("file.json")
+        except FileNotFoundError:
             pass
 
     def test_save_and_reload(self):

@@ -14,15 +14,22 @@ class TestUser(unittest.TestCase):
 
     def setUp(self):
         """Sets up the unittest"""
-        user1 = User()
-        user1.email = "user1@mail.com"
-        user1.password = "P$ssword"
-        user1.first_name = "Foo"
-        user1.last_name = "Bar"
+        self.user1 = User()
+        self.user1.email = "user1@mail.com"
+        self.user1.password = "P$ssword"
+        self.user1.first_name = "Foo"
+        self.user1.last_name = "Bar"
+
+    def tearDown(self):
+        """Clean up the dirt"""
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
 
     def test_for_instantiation(self):
         """Tests instantiation of User class."""
-        user1 = User()
+        user1 = self.user1
         self.assertEqual(str(type(user1)), "<class 'models.user.User'>")
         self.assertIsInstance(user1, User)
         self.assertTrue(issubclass(type(user1), BaseModel))
@@ -45,7 +52,7 @@ class TestUser(unittest.TestCase):
 
     def test_has_attributes(self):
         """Tests if User class has attributes."""
-        user = User()
+        user = self.user1
         self.assertTrue('id' in user.__dict__)
         self.assertTrue('created_at' in user.__dict__)
         self.assertTrue('updated_at' in user.__dict__)
@@ -53,6 +60,55 @@ class TestUser(unittest.TestCase):
         self.assertTrue('password' in user.__dict__)
         self.assertTrue('first_name' in user.__dict__)
         self.assertTrue('last_name' in user.__dict__)
+
+    def test_attribute_type(self):
+        """Test data type of attributes."""
+        user = self.user1
+        self.assertIs(type(user.email), str)
+        self.assertIs(type(user.password), str)
+        self.assertIs(type(user.first_name), str)
+        self.assertIs(type(user.last_name), str)
+
+    def test_is_subclass(self):
+        """Test that User is a subclass of BaseModel"""
+        user = self.user1
+        self.assertIsInstance(user, BaseModel)
+        self.assertTrue(hasattr(user, "id"))
+        self.assertTrue(hasattr(user, "created_at"))
+        self.assertTrue(hasattr(user, "updated_at"))
+
+    def checking_for_doc(self):
+        self.assertIsNotNone(User.__doc__)
+
+    def test_save(self):
+        """Tests if instance is saved."""
+        user1 =self.user1
+        user1.save()
+        self.assertNotEqual(user1.created_at, user1.updated_at)
+
+    def test_to_dict(self):
+        """Test if method to_dict is available."""
+        self.assertTrue('to_dict' in dir(self.user1))
+
+    def test_to_dict_creates_dict(self):
+        """test to_dict method creates a dictionary with proper attrs"""
+        u = self.user1
+        new_dict = u.to_dict()
+        self.assertEqual(type(new_dict), dict)
+        for attr in u.__dict__:
+            self.assertTrue(attr in new_dict)
+            self.assertTrue("__class__" in new_dict)
+
+    def test_to_dict_values(self):
+        """test that values in dict returned from to_dict are correct"""
+        time_format = "%Y-%m-%dT%H:%M:%S.%f"
+        u = self.user1
+        new_dict = u.to_dict()
+        self.assertEqual(new_dict["__class__"], "User")
+        self.assertEqual(type(new_dict["created_at"]), str)
+        self.assertEqual(type(new_dict["updated_at"]), str)
+        self.assertEqual(new_dict["created_at"], u.created_at.strftime(time_format))
+        self.assertEqual(new_dict["updated_at"], u.updated_at.strftime(time_format))
 
 
 if __name__ == "__main__":
