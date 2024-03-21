@@ -9,6 +9,7 @@ import json
 from models.base_model import BaseModel
 from models.user import User
 
+
 class FileStorage():
     """
     It serializes instances to a JSON file and deserializes
@@ -52,4 +53,4 @@ class FileStorage():
                 serialized = json.load(f)
                 for key, object_dict in serialized.items():
                     FileStorage.__objects[key] = eval(
-                        object_dict['__class__'])(**object_dict) 
+                        object_dict['__class__'])(**object_dict)
