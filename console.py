@@ -12,11 +12,38 @@ from models.review import Review
 
 class_names = {
     "BaseModel", "User"}
-
+class_met = {"all()", "show()", "destroy()", "count()", "update()"}
 
 class HBNBCommand(cmd.Cmd):
     """This is the console's entry point."""
     prompt = "(hbnb) "
+
+    def default(self, arg):
+        """Handles unknown commands."""
+        args = arg.split('.')
+
+        if len(args) == 2:
+            method = args[1].split("(")[0]
+            if method == 'all' or method == 'count':
+                com = "self.do_{}('{}')".format(method, args[0])
+            elif method == 'destroy' or method == 'show':
+                param = args[1].split("(")[1].split(")")[0]
+                com = "self.do_{}('{} {}')".format(method, args[0], param)
+            elif method == 'update':
+                param = (args[1].split("(")[1])
+                param = param.split(" ")
+                instance_id, attr_name = param[0], param[1]
+                attr_value = param[2].split(")")[0]
+                com = "self.do_{}('{} {} {} {}')".format(method, args[0], instance_id, attr_name, attr_value)
+
+            try:
+                eval(com)
+            except AttributeError:
+                print("**Invalid method**: {}".format(args[1]))
+
+
+        else:
+            print("*** Unknown syntax:", arg)
 
     def do_quit(self, arg):
         """Quit the console."""
@@ -128,7 +155,7 @@ class HBNBCommand(cmd.Cmd):
                   if key.split('.')[0] == arg])
 
         else:
-            print(str(storage.all()))
+            print([str(obj) for key, obj in objects.items()])
 
     def help_all(self):
         """Prints help message for all command."""
@@ -167,6 +194,7 @@ class HBNBCommand(cmd.Cmd):
         print("Updates an instance based on the class name and id by adding or"
               " updating attribute (save the change into the JSON file)\nUsage"
               ": update <class name> <id> <attribute name>, attribute value>")
+
 
 
 if __name__ == "__main__":
