@@ -10,7 +10,6 @@ class User(BaseModel):
     """
     Defines a class User that inherits from BaseModel
     """
-
     email = ""
     password = ""
     first_name = ""

@@ -11,7 +11,7 @@ from models.amenity import Amenity
 from models.review import Review
 
 class_names = {
-    "BaseModel", "User"}
+    "BaseModel", "User", "State", "City", "Amenity", "Place", "Review"}
 class_met = {"all()", "show()", "destroy()", "count()", "update()"}
 
 
@@ -146,12 +146,10 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all
         instances based or not on the class name."""
         objects = storage.all()
-
         if arg:
             if arg not in class_names:
                 print("** class doesn't exist **")
                 return
-
             print([str(obj) for key, obj in objects.items()
                   if key.split('.')[0] == arg])
 
