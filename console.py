@@ -29,13 +29,13 @@ class HBNBCommand(cmd.Cmd):
                 com = "self.do_{}('{}')".format(method, args[0])
             elif method == 'destroy' or method == 'show':
                 param = args[1].split("(")[1].split(")")[0]
-                com = "self.do_{}('{} {}')".format(method, args[0], param)
+                com = 'self.do_{}("{} \"{}\"")'.format(method, args[0], param)
             elif method == 'update':
                 param = (args[1].split("(")[1])
                 param = param.split(" ")
                 inst_id, att_name = param[0], param[1]
                 att_val = param[2].split(")")[0]
-                c = "{} {} {} {}".format(args[0], inst_id, att_name, att_val)
+                c = "{} '{}' '{}' '{}'".format(args[0], inst_id, att_name, att_val)
                 com = "self.do_{}('{}')".format(method, c)
 
             try:
