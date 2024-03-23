@@ -61,9 +61,9 @@ The first phase is to manipulate a powerful storage system to give an abstractio
 | ```EOF```  | This command quits or exits the console interpreter when pressed ```Ctrl+D``` |
 | ```help``` or ```help <command>```  | Displays all commands or Displays instructions for a specific command (Ex: ```help``` or ```help quit```).
 | ```create <class>``` | Creates an object of type, saves it to a JSON file, and prints the objects ID (Ex: ```create BaseModel```)
-| ```show <class> <id>```\n or \n```<class>.show(<id>)``` | Shows string representation of an object (Ex: ```show BaseModel 1234-1234-1234``` or ```BaseModel.show("1234-1234-1234")```)
-| ```destroy <class> <id>``` \n or \n```<class>.destroy(<id>)```  | Deletes an objects based on the class name and id (Ex: ```destroy BaseModel 1234-1234-1234``` or ```BaseModel.destroy("1234-1234-1234")```).
-| ```all or all <class>```\n or \n```<class>.all()```  | Prints all string representations of all objects or Prints all string representations of all objects of a specific class (Ex: ```all BaseModel``` or ```all or User.all()```).
+| ```show <class> <id>``` <br> or <br>```<class>.show(<id>)``` | Shows string representation of an object (Ex: ```show BaseModel 1234-1234-1234``` or ```BaseModel.show("1234-1234-1234")```)
+| ```destroy <class> <id>``` <br> or <br>```<class>.destroy(<id>)```  | Deletes an objects based on the class name and id (Ex: ```destroy BaseModel 1234-1234-1234``` or ```BaseModel.destroy("1234-1234-1234")```).
+| ```all or all <class>```<br> or <br>```<class>.all()```  | Prints all string representations of all objects or Prints all string representations of all objects of a specific class (Ex: ```all BaseModel``` or ```all or User.all()```).
 | ```update <class> <id> <attribute name> "<attribute value>"```\n or \n```<class>.update("id" "attribute name" "attribute value"```  | Updates an object with a certain attribute (new or existing) (```Usage: update <class name> <id> <attribute name> <attribute value>```).
 | ```<class>.count()```  | Retrieves the number of objects of a certain class (```Usage: <class name>.count(), Example: User.count()```).
 

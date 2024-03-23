@@ -14,6 +14,7 @@ class_names = {
     "BaseModel", "User"}
 class_met = {"all()", "show()", "destroy()", "count()", "update()"}
 
+
 class HBNBCommand(cmd.Cmd):
     """This is the console's entry point."""
     prompt = "(hbnb) "
@@ -32,15 +33,15 @@ class HBNBCommand(cmd.Cmd):
             elif method == 'update':
                 param = (args[1].split("(")[1])
                 param = param.split(" ")
-                instance_id, attr_name = param[0], param[1]
-                attr_value = param[2].split(")")[0]
-                com = "self.do_{}('{} {} {} {}')".format(method, args[0], instance_id, attr_name, attr_value)
+                inst_id, att_name = param[0], param[1]
+                att_val = param[2].split(")")[0]
+                c = "{} {} {} {}".format(args[0], inst_id, att_name, att_val)
+                com = "self.do_{}('{}')".format(method, c)
 
             try:
                 eval(com)
             except AttributeError:
                 print("**Invalid method**: {}".format(args[1]))
-
 
         else:
             print("*** Unknown syntax:", arg)
@@ -195,6 +196,16 @@ class HBNBCommand(cmd.Cmd):
               " updating attribute (save the change into the JSON file)\nUsage"
               ": update <class name> <id> <attribute name>, attribute value>")
 
+    def do_count(self, arg):
+        """Count the number of instances of a class"""
+        try:
+            if not arg:
+                raise SyntaxError("class name missing")
+            class_name = arg.split()[0]
+            count = storage.count(class_name)
+            print(count)
+        except Exception as e:
+            print(e)
 
 
 if __name__ == "__main__":

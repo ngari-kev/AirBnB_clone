@@ -59,3 +59,10 @@ class FileStorage():
                 for key, object_dict in serialized.items():
                     FileStorage.__objects[key] = eval(
                         object_dict['__class__'])(**object_dict)
+
+    def count(self, cls=None):
+        """Count the number of instances of a class"""
+        if cls is not None:
+            return sum(1 for instance in self.all().values()
+                       if type(instance).__name__ == cls)
+        return len(self.__objects)
