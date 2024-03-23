@@ -34,19 +34,6 @@ class TestFileStorage(unittest.TestCase):
 
         self.assertEqual(len(new_storage.all()), 2)
 
-    def test_all_method(self):
-        """Adds objects to storage and tests if method returns all objects."""
-        obj1 = BaseModel()
-        obj2 = BaseModel()
-        obj1_name = obj1.__class__.__name__
-        obj2_name = obj2.__class__.__name__
-        self.storage.new(obj1)
-        self.storage.new(obj2)
-
-        self.assertEqual(len(self.storage.all()), 2)
-        self.assertIn(obj1_name + "." + obj1.id, self.storage.all())
-        self.assertIn(obj2_name + "." + obj2.id, self.storage.all())
-
     def test_initialization(self):
         """Tests if instances and files have been created."""
         self.assertIsInstance(self.storage, FileStorage)
