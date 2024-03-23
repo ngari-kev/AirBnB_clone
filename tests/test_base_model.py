@@ -97,7 +97,8 @@ class TestBaseModel(unittest.TestCase):
         Checks for str method
         """
         cls_name = self.test.__class__.__name__
-        expected_str = "[{}] ({}) {}".format(cls_name, self.test.id, self.test.__dict__)
+        expected_str = "[{}] ({}) {}".format(cls_name,
+                                             self.test.id, self.test.__dict__)
         self.assertEqual(str(self.test), expected_str)
 
     def test_for_classname(self):
@@ -155,6 +156,7 @@ class TestBaseModel(unittest.TestCase):
         b1 = self.test
         with self.assertRaises(TypeError):
             b1.to_dict(None)
- 
+
+
 if __name__ == '__main__':
     unittest.main()

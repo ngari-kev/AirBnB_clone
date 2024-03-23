@@ -82,7 +82,7 @@ class TestUser(unittest.TestCase):
 
     def test_save(self):
         """Tests if instance is saved."""
-        user1 =self.user1
+        user1 = self.user1
         user1.save()
         self.assertNotEqual(user1.created_at, user1.updated_at)
 
@@ -107,9 +107,11 @@ class TestUser(unittest.TestCase):
         self.assertEqual(new_dict["__class__"], "User")
         self.assertEqual(type(new_dict["created_at"]), str)
         self.assertEqual(type(new_dict["updated_at"]), str)
-        self.assertEqual(new_dict["created_at"], u.created_at.strftime(time_format))
-        self.assertEqual(new_dict["updated_at"], u.updated_at.strftime(time_format))
+        self.assertEqual(new_dict["created_at"],
+                         u.created_at.strftime(time_format))
+        self.assertEqual(new_dict["updated_at"],
+                         u.updated_at.strftime(time_format))
 
 
 if __name__ == "__main__":
-    unittest.main()    
+    unittest.main()
