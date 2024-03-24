@@ -205,6 +205,11 @@ class HBNBCommand(cmd.Cmd):
         except Exception as e:
             print(e)
 
+    def help_count(self):
+        """Prints the help message for count command."""
+        print("Retrieves the number of instances of a class"
+              "\nUsage: <class name>.count()")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
