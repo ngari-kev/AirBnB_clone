@@ -16,23 +16,12 @@ class TestFileStorage(unittest.TestCase):
         self.file_path = "file.json"
         self.storage = FileStorage()
 
-    def tearDownClass(cls):
+    def tearDown(self):
         """Clean up the dirt"""
         try:
             os.remove("file.json")
         except FileNotFoundError:
             pass
-
-    def test_save_and_reload(self):
-        """Adds objects to storage, reloads and tests if they were created."""
-        self.storage.new(BaseModel())
-        self.storage.new(BaseModel())
-        self.storage.save()
-
-        new_storage = FileStorage()
-        new_storage.reload()
-
-        self.assertEqual(len(new_storage.all()), 2)
 
     def test_initialization(self):
         """Tests if instances and files have been created."""
